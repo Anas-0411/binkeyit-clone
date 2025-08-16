@@ -9,13 +9,10 @@ import userImageCloudinary from "../utils/uploadImageCloudinary.js";
 import generateOpt from "../utils/generateOtp.js";
 import forgotPasswordTemplate from "../utils/forgotPasswordTemplate.js";
 
-// Register user
 export async function registerUserController(req, res) {
   try {
-    // fetch data from the body
     const { name, email, password } = req.body;
 
-    // checking input fields
     if (!name || !email || !password) {
       return res.status(400).json({
         message: "Provide email, name, and password",
@@ -24,9 +21,7 @@ export async function registerUserController(req, res) {
       });
     }
 
-    // checking if user email already register
     const user = await UserModel.findOne({ email });
-
     if (user) {
       return res.status(409).json({
         message: "User is already registered",
@@ -35,40 +30,32 @@ export async function registerUserController(req, res) {
       });
     }
 
-    // hashing the password
     const salt = await bcryptjs.genSalt(10);
     const hashPassword = await bcryptjs.hash(password, salt);
 
-    const payload = {
+    const newUser = new UserModel({
       name,
       email,
       password: hashPassword,
-    };
+    });
 
-    // creating new user
-    const newUser = new UserModel(payload);
     const save = await newUser.save();
 
-    // verifaction of email
     const VerifyEmailUrl = `${process.env.FRONTEND_URL}/verify-email?code=${save._id}`;
-
-    // Ensure the email function is awaited
     await sendEmail({
       sendTo: email,
       subject: "Verify email from Binkeyit",
       html: verifyEmailTemplate({ name, url: VerifyEmailUrl }),
     });
 
-    //saving the data in database
     return res.status(201).json({
       message: "User registered successfully",
       error: false,
       success: true,
-      data: save,
+      data: { id: save._id, name: save.name, email: save.email },
     });
   } catch (error) {
-    console.error("Registration Error:", error); // Logs error for debugging
-
+    console.error("Registration Error:", error);
     return res.status(500).json({
       message: error.message || "Internal server error",
       error: true,

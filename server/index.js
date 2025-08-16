@@ -13,15 +13,14 @@ import userRouter from "./routes/user.route.js";
 
 // using modules
 const app = express();
+
+// enable cors
 app.use(
   cors({
+    origin: process.env.FRONTEND_URL,
     credentials: true,
-    orign: process.env.FRONTEND_URL,
   })
 );
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(
@@ -29,9 +28,11 @@ app.use(
     crossOriginEmbedderPolicy: false,
   })
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Define port number
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 //Index route
 app.get("/", (req, res) => {
