@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { FaEyeSlash } from "react-icons/fa";
-import { FaEye } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Axios from "../utils/Axios";
 import SummaryApis from "../common/SummaryApis";
 import AxiosToastError from "../utils/AxiosToastError";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [data, setData] = useState({
     email: "",
-    password: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -31,19 +27,18 @@ const Login = () => {
 
     try {
       const response = await Axios({
-        ...SummaryApis.login,
+        ...SummaryApis.forgot_password,
         data: data,
       });
 
       if (response.data.success) {
         toast.success(response.data.message);
-        localStorage.setItem("accesstoken", response.data.data.accessToken);
-        localStorage.setItem("refreshtoken", response.data.data.refreshToken);
+        navigate("/verify-otp", {
+          state: data,
+        });
         setData({
           email: "",
-          password: "",
         });
-        navigate("/home");
       }
 
       // console.log("response", response);
@@ -55,10 +50,7 @@ const Login = () => {
   return (
     <section className="container w-full mx-auto px-4">
       <div className="container bg-white my-4 w-full max-w-lg mx-auto rounded p-8">
-        <p className="text-center font-bold ">
-          Welcome to <span className="text-yellow-500">Binkey</span>
-          <span className="text-green-500">it</span>
-        </p>
+        <p className="text-center font-bold ">Forgot Password</p>
         <form className="grid gap-2 mt-4 " onSubmit={handleSubmit}>
           <div className="grid gap-2">
             <label htmlFor="email">Email:</label>
@@ -72,32 +64,6 @@ const Login = () => {
               placeholder="Enter your email"
             />
           </div>
-          <div className="grid gap-2">
-            <label htmlFor="password">Password:</label>
-            <div className="bg-blue-50 p-2 border-2 rounded flex items-center focus-within:border-amber-500">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                className="w-full outline-none"
-                name="password"
-                value={data.password}
-                onChange={handleChange}
-                placeholder="Enter your password"
-              />
-              <div
-                className="cursor-pointer"
-                onClick={() => setShowPassword((preve) => !preve)}
-              >
-                {showPassword ? <FaEye /> : <FaEyeSlash />}
-              </div>
-            </div>
-            <Link
-              to={"/forgot-password"}
-              className="block ml-auto hover:text-green-700"
-            >
-              Forgot password?
-            </Link>
-          </div>
 
           <button
             className={`${
@@ -105,17 +71,17 @@ const Login = () => {
             } text-white px-2 rounded font-semibold h-10 cursor-pointer`}
             disabled={!validateFeild}
           >
-            Login
+            Send Otp
           </button>
         </form>
 
         <p className="my-2">
-          Don't have a account?
+          Already have a account?
           <Link
-            to={"/register"}
+            to={"/login"}
             className="font-semibold text-green-600 hover:text-green-800"
           >
-            Register
+            Login
           </Link>
         </p>
       </div>
@@ -123,4 +89,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
