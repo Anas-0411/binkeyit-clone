@@ -32,7 +32,7 @@ userRouter.put(
 );
 userRouter.put("/update-profile", auth, updateUserProfileController);
 userRouter.put("/forgot-password", forgotPasswordController);
-userRouter.put("/verify-forget-password-otp", verifyForgotPasswordOtpController);
+userRouter.put("/verify-forgot-password-otp", verifyForgotPasswordOtpController);
 userRouter.put("/reset-password", resetPasswordController)
 userRouter.post("/refresh-token", refreshTokenController)
 

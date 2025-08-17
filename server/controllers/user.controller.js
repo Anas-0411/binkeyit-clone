@@ -9,6 +9,7 @@ import userImageCloudinary from "../utils/uploadImageCloudinary.js";
 import generateOpt from "../utils/generateOtp.js";
 import forgotPasswordTemplate from "../utils/forgotPasswordTemplate.js";
 
+// register controller
 export async function registerUserController(req, res) {
   try {
     const { name, email, password } = req.body;
