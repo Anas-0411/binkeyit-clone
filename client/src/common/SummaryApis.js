@@ -21,10 +21,10 @@ const SummaryApis = {
     url: "/api/user/reset-password",
     method: "put",
   },
-  refreshToken:{
+  refreshToken: {
     url: "/api/user/refresh-token",
-    method: "post"
-  }
+    method: "post",
+  },
 };
 
 export default SummaryApis;

@@ -3,6 +3,7 @@ import { Router } from "express";
 // importing modules
 import {
   forgotPasswordController,
+  getUserDetails,
   loginUserController,
   logoutUserController,
   refreshTokenController,
@@ -32,8 +33,12 @@ userRouter.put(
 );
 userRouter.put("/update-profile", auth, updateUserProfileController);
 userRouter.put("/forgot-password", forgotPasswordController);
-userRouter.put("/verify-forgot-password-otp", verifyForgotPasswordOtpController);
-userRouter.put("/reset-password", resetPasswordController)
-userRouter.post("/refresh-token", refreshTokenController)
+userRouter.put(
+  "/verify-forgot-password-otp",
+  verifyForgotPasswordOtpController
+);
+userRouter.put("/reset-password", resetPasswordController);
+userRouter.post("/refresh-token", refreshTokenController);
+userRouter.get("/user-details", auth, getUserDetails);
 
 export default userRouter;

@@ -3,8 +3,8 @@ import Logo from "./Logo";
 import { FaRegUserCircle } from "react-icons/fa";
 import useMobile from "../hooks/useMobile";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { BsCart4 } from "react-icons/bs";
 import { FaCartShopping } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isMobile] = useMobile();
@@ -14,6 +14,9 @@ const Header = () => {
   console.log("isMobile:", isMobile);
   console.log("isSearchPage:", isSearchPage);
   const navigate = useNavigate();
+  // const user = useSelector((state) => state?.user);
+  // console.log("user from store", user);
+
   const redirectToLoginPage = () => {
     navigate("/login");
   };

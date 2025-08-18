@@ -139,10 +139,15 @@ export async function loginUserController(req, res) {
     const accessToken = await generateAccessToken(user._id);
     const refreshToken = await generateRefreshToken(user._id);
 
-    // Store the refresh token in DB
+    // Store the data in DB
     await UserModel.findByIdAndUpdate(user._id, {
       refresh_token: refreshToken,
+      last_login_date: new Date(),
     });
+
+    // const updateUser = await UserModel.findByIdAndUpdate(user._id, {
+    //   last_login_date: new Date(),
+    // });
 
     const cookieOption = {
       httpOnly: true,
@@ -474,6 +479,30 @@ export async function refreshTokenController(req, res) {
       data: {
         accessToken: newAccessToken,
       },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Internal server error",
+      error: true,
+      success: false,
+    });
+  }
+}
+
+// get user login details
+export async function getUserDetails(req, res) {
+  try {
+    const userId = req.userId;
+    console.log(userId);
+
+    const user = await UserModel.findById(userId).select(
+      "-password -refresh_token"
+    );
+    return res.status(200).json({
+      message: "user details",
+      data: user,
+      success: true,
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({

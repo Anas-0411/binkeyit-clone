@@ -45,8 +45,7 @@ const Login = () => {
         });
         navigate("/home");
       }
-
-      // console.log("response", response);
+      console.log("response", response);
     } catch (error) {
       AxiosToastError(error);
     }
