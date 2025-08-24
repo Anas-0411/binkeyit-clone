@@ -1,10 +1,24 @@
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import "./App.css";
+import { useDispatch } from "react-redux";
+import { Toaster } from "react-hot-toast";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { Toaster } from "react-hot-toast";
+import fetchUserDetails from "./utils/fetchUserDetails";
+import "./App.css";
+import { setUserDetails } from "./store/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const fetchUser = async () => {
+    const userDetails = await fetchUserDetails();
+    // console.log("user data: ", userDetails.data);
+    dispatch(setUserDetails(userDetails.data));
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
   return (
     <>
       <Header />
