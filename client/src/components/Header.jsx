@@ -8,9 +8,9 @@ const Header = () => {
   const [isMobile] = useMobile();
   const isLocation = useLocation();
   const isSearchPage = isLocation.pathname === "/search";
-  console.log("isLocation:", isLocation.pathname);
-  console.log("isMobile:", isMobile);
-  console.log("isSearchPage:", isSearchPage);
+  // console.log("isLocation:", isLocation.pathname);
+  // console.log("isMobile:", isMobile);
+  // console.log("isSearchPage:", isSearchPage);
   return (
     <header className="h-24 lg:h-20 lg:shadow-md sticky top-0 flex flex-col justify-center gap-1 bg-white">
       {!(isMobile && isSearchPage) && (

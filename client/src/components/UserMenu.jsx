@@ -1,41 +1,67 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "../utils/Axios.js";
 import SummaryApis from "../common/SummaryApis";
 import { logout } from "../store/userSlice.js";
 import toast from "react-hot-toast";
 import AxiosToastError from "../utils/AxiosToastError.js";
+import Divider from "./Divider.jsx";
 
 const UserMenu = ({ close }) => {
-  // const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       const response = await Axios({
         ...SummaryApis.logout,
       });
       if (response.data.success) {
-        close();
+        if (close) {
+          close();
+        }
         dispatch(logout());
         localStorage.clear();
         toast.success(response.data.message);
+        navigate("/");
       }
     } catch (error) {
       AxiosToastError(error);
+    }
+  };
+  const handleClose = () => {
+    if (close) {
+      close();
     }
   };
 
   return (
     <div>
       {/* <div className="font-semibold">My Account</div> */}
-      {/* <div className="font-semibold">{user.name || user.mobile}</div> */}
+      <div className="font-semibold">{user.name || user.mobile}</div>
+      <Divider />
       <div className="text-lg grid text-center gap-2">
-        <Link to={"/profile"} className="hover:bg-green-600 hover:text-white">
+        <Link
+          to={"/dashboard/profile"}
+          onClick={handleClose}
+          className="hover:bg-green-600 hover:text-white"
+        >
           My Profile
         </Link>
-        <Link to={""} className="hover:bg-yellow-500 hover:text-white">
+        <Link
+          to={"/dashboard/myorders"}
+          onClick={handleClose}
+          className="hover:bg-yellow-500 hover:text-white"
+        >
           My Orders
+        </Link>
+        <Link
+          to={"/dashboard/address"}
+          onClick={handleClose}
+          className="hover:bg-blue-500 hover:text-white"
+        >
+          Save Address
         </Link>
         <button
           className="bg-red-600 text-white cursor-pointer"

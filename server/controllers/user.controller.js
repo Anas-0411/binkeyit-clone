@@ -240,34 +240,35 @@ export async function uploadUserAvatarController(req, res) {
 // update user profile controller
 export async function updateUserProfileController(req, res) {
   try {
-    const userId = req.userId;
-    const { name, email, password, mobile } = req.body;
+    const userId = req.userId; //auth middleware
+    const { name, email, mobile, password } = req.body;
 
-    const updateData = {};
-    if (name) updateData.name = name;
-    if (email) updateData.email = email;
-    if (mobile) updateData.mobile = mobile;
-    if (password) updateData.password = await bcryptjs.hash(password, 10);
+    let hashPassword = "";
 
-    if (Object.keys(updateData).length === 0) {
-      return res.status(400).json({
-        message: "No data provided to update",
-        success: false,
-        error: true,
-      });
+    if (password) {
+      const salt = await bcryptjs.genSalt(10);
+      hashPassword = await bcryptjs.hash(password, salt);
     }
 
-    await UserModel.findByIdAndUpdate(userId, updateData);
+    const updateUser = await UserModel.updateOne(
+      { _id: userId },
+      {
+        ...(name && { name: name }),
+        ...(email && { email: email }),
+        ...(mobile && { mobile: mobile }),
+        ...(password && { password: hashPassword }),
+      }
+    );
 
     return res.json({
-      message: "User profile updated successfully",
-      success: true,
+      message: "Updated successfully",
       error: false,
-      updatedFields: updateData, // Only return updated fields
+      success: true,
+      data: updateUser,
     });
   } catch (error) {
     return res.status(500).json({
-      message: error.message || "Internal server error",
+      message: error.message || error,
       error: true,
       success: false,
     });
@@ -437,7 +438,7 @@ export async function resetPasswordController(req, res) {
 export async function refreshTokenController(req, res) {
   try {
     const { refreshToken } =
-      req.cookies || req?.header?.authorization?.split("")[1];
+      req.cookies || req?.headers?.authorization?.split("")[1];
     if (!refreshToken) {
       return res.status(401).json({
         message: "No refresh token provided",

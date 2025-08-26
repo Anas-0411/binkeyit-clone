@@ -19,15 +19,19 @@ const Login = () => {
   };
 
   const user = useSelector((state) => state?.user);
-  console.log("user from store", user);
+  // console.log("user from store", user);
+
+  const handleMobileUser = () => {
+    if (!user._id) {
+      navigate("/login");
+      return;
+    }
+    navigate("/user");
+  };
   return (
     <div>
       {/* display only in mobile version */}
-      <button
-        className="text-neutral-600 lg:hidden"
-        onClick={redirectToLoginPage}
-        aria-label="User Profile"
-      >
+      <button className="text-neutral-600 lg:hidden" onClick={handleMobileUser}>
         <FaRegUserCircle size={26} />
       </button>
       {/* display only in desktop version */}
