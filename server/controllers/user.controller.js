@@ -45,7 +45,7 @@ export async function registerUserController(req, res) {
     const VerifyEmailUrl = `${process.env.FRONTEND_URL}/verify-email?code=${save._id}`;
     await sendEmail({
       sendTo: email,
-      subject: "Verify email from Binkeyit",
+      subject: "Verify email from BinkeyIt",
       html: verifyEmailTemplate({ name, url: VerifyEmailUrl }),
     });
 
@@ -65,7 +65,7 @@ export async function registerUserController(req, res) {
   }
 }
 
-// verifing email
+// verifying email
 export async function verifyEmailController(req, res) {
   try {
     const { code } = req.body;
@@ -84,7 +84,7 @@ export async function verifyEmailController(req, res) {
       }
     );
     return res.json({
-      message: "Email verifiction done",
+      message: "Email verification done",
       success: true,
       error: false,
       data: updateUser,
@@ -240,35 +240,58 @@ export async function uploadUserAvatarController(req, res) {
 // update user profile controller
 export async function updateUserProfileController(req, res) {
   try {
-    const userId = req.userId; //auth middleware
+    const userId = req.userId; // from auth middleware
     const { name, email, mobile, password } = req.body;
 
-    let hashPassword = "";
+    // Build update object dynamically
+    const updateData = {};
 
+    if (name) updateData.name = name;
+    if (mobile) updateData.mobile = mobile;
+    if (email) {
+      // Check if email already exists for another user
+      const existingUser = await UserModel.findOne({
+        email,
+        _id: { $ne: userId },
+      });
+      if (existingUser) {
+        return res.status(400).json({
+          message: "Email already in use",
+          error: true,
+          success: false,
+        });
+      }
+      updateData.email = email;
+    }
     if (password) {
       const salt = await bcryptjs.genSalt(10);
-      hashPassword = await bcryptjs.hash(password, salt);
+      updateData.password = await bcryptjs.hash(password, salt);
     }
 
-    const updateUser = await UserModel.updateOne(
-      { _id: userId },
-      {
-        ...(name && { name: name }),
-        ...(email && { email: email }),
-        ...(mobile && { mobile: mobile }),
-        ...(password && { password: hashPassword }),
-      }
+    // Update user and return new doc
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userId,
+      { $set: updateData },
+      { new: true, runValidators: true, select: "-password" } // exclude password
     );
 
+    if (!updatedUser) {
+      return res.status(404).json({
+        message: "User not found",
+        error: true,
+        success: false,
+      });
+    }
+
     return res.json({
-      message: "Updated successfully",
+      message: "Profile updated successfully",
       error: false,
       success: true,
-      data: updateUser,
+      data: updatedUser,
     });
   } catch (error) {
     return res.status(500).json({
-      message: error.message || error,
+      message: error.message || "Something went wrong",
       error: true,
       success: false,
     });

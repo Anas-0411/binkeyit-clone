@@ -7,9 +7,13 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import helmet from "helmet";
 
-// importing files
+// database connection
 import connectDB from "./config/connectDB.js";
+
+// importing routes
 import userRouter from "./routes/user.route.js";
+import categoryRouter from "./routes/category.route.js";
+import uploadRouter from "./routes/upload.route.js";
 
 // using modules
 const app = express();
@@ -39,9 +43,12 @@ app.get("/", (req, res) => {
   res.send("Welcome to BinkeyIt");
 });
 
+// using routes
 app.use("/api/user", userRouter);
+app.use("/api/category", categoryRouter);
+app.use("/api/file", uploadRouter);
 
-// Start the server and connect nomgodb
+// Start the server and connect mongodb
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

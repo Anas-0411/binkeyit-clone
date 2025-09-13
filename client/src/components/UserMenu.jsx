@@ -50,6 +50,34 @@ const UserMenu = ({ close }) => {
           My Profile
         </Link>
         <Link
+          to={"/dashboard/category"}
+          onClick={handleClose}
+          className="hover:bg-yellow-500 hover:text-white"
+        >
+          Category
+        </Link>
+        <Link
+          to={"/dashboard/sub-category"}
+          onClick={handleClose}
+          className="hover:bg-yellow-500 hover:text-white"
+        >
+          Sub Category
+        </Link>
+        <Link
+          to={"/dashboard/upload-product"}
+          onClick={handleClose}
+          className="hover:bg-yellow-500 hover:text-white"
+        >
+          Upload Product
+        </Link>
+        <Link
+          to={"/dashboard/product"}
+          onClick={handleClose}
+          className="hover:bg-yellow-500 hover:text-white"
+        >
+          Product
+        </Link>
+        <Link
           to={"/dashboard/myorders"}
           onClick={handleClose}
           className="hover:bg-yellow-500 hover:text-white"
@@ -59,7 +87,7 @@ const UserMenu = ({ close }) => {
         <Link
           to={"/dashboard/address"}
           onClick={handleClose}
-          className="hover:bg-blue-500 hover:text-white"
+          className="hover:bg-yellow-500 hover:text-white"
         >
           Save Address
         </Link>

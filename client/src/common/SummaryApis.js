@@ -1,6 +1,7 @@
 export const baseUrl = "http://localhost:3000";
 
 const SummaryApis = {
+  // User APIs
   register: {
     url: "/api/user/register",
     method: "post",
@@ -40,6 +41,16 @@ const SummaryApis = {
   updateProfile: {
     url: "/api/user/update-profile",
     method: "put",
+  },
+  // File APIs
+  uploadImage: {
+    url: "/api/file/upload-image",
+    method: "post",
+  },
+  // Category APIs
+  addCategory: {
+    url: "/api/category/add-category",
+    method: "post",
   },
 };
 
