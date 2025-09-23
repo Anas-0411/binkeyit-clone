@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
       req.cookies.accessToken || req?.headers?.authorization?.split(" ")[1];
     //console.log("Token:", token);
     if (!token) {
-      return res.ststus(401).json({
+      return res.status(401).json({
         message: "Provide Token",
         error: true,
         success: false,

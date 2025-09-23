@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import uploadImageUtils from "../utils/uploadImageUtils";
 import Axios from "../utils/Axios";
@@ -6,14 +6,13 @@ import SummaryApis from "../common/SummaryApis";
 import toast from "react-hot-toast";
 import AxiosToastError from "../utils/AxiosToastError";
 
-const UploadCategoryModel = ({ close, fetchData }) => {
+const EditCategory = ({ close, fetchData, data: categoryData }) => {
   const [data, setData] = useState({
-    name: "",
-    image: "",
+    _id: categoryData._id,
+    name: categoryData.name,
+    image: categoryData.image,
   });
   const [loading, setLoading] = useState(false);
-
-  // Handle onChange
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => ({
@@ -27,9 +26,10 @@ const UploadCategoryModel = ({ close, fetchData }) => {
     if (!file) {
       return;
     }
+    setLoading(true);
     const response = await uploadImageUtils(file);
     const { data: ImageResponse } = response;
-
+    setLoading(false);
     setData((preve) => {
       return {
         ...preve,
@@ -44,7 +44,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
     try {
       setLoading(true);
       const response = await Axios({
-        ...SummaryApis.addCategory,
+        ...SummaryApis.updateCategory,
         data: data,
       });
       const { data: responseData } = response;
@@ -63,7 +63,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
     <section className="fixed inset-0 p-4 bg-neutral-700/60 flex items-center justify-center">
       <div className="bg-white max-w-5xl w-full p-4 rounded">
         <div className="flex items-center justify-between">
-          <h1 className="font-semibold text-xl">Upload New Category</h1>
+          <h1 className="font-semibold text-xl">Update Category</h1>
           <button className="w-fit block ml-auto">
             <IoClose size={20} onClick={close} className="cursor-pointer" />
           </button>
@@ -103,7 +103,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
                       : "bg-amber-400 hover:bg-amber-500 cursor-pointer"
                   } rounded text-white px-4 py-2 transition`}
                 >
-                  Upload Image
+                  {loading ? "Uploading..." : "Upload Image"}
                 </div>
               </label>
               <input
@@ -124,7 +124,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
                 : "bg-gray-600 cursor-not-allowed opacity-60"
             }`}
           >
-            Add Category
+            Update Category
           </button>
         </form>
       </div>
@@ -132,4 +132,4 @@ const UploadCategoryModel = ({ close, fetchData }) => {
   );
 };
 
-export default UploadCategoryModel;
+export default EditCategory;

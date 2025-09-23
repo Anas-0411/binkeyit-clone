@@ -1,7 +1,7 @@
 import Search from "./Search";
 import Logo from "./Logo";
 import useMobile from "../hooks/useMobile";
-import { useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Login from "./Login";
 
 const Header = () => {
@@ -11,6 +11,7 @@ const Header = () => {
   // console.log("isLocation:", isLocation.pathname);
   // console.log("isMobile:", isMobile);
   // console.log("isSearchPage:", isSearchPage);
+  // z-40
   return (
     <header className="h-24 lg:h-20 lg:shadow-md sticky top-0 flex flex-col justify-center gap-1 bg-white">
       {!(isMobile && isSearchPage) && (

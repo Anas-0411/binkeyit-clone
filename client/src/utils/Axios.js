@@ -6,10 +6,10 @@ const Axios = axios.create({
   withCredentials: true,
 });
 
-// 🔹 Interceptor to attach access token to every request
+// Interceptor to attach access token to every request
 Axios.interceptors.request.use(
   async (config) => {
-    const accessToken = localStorage.getItem("accessToken"); // ✅ fixed
+    const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -20,7 +20,7 @@ Axios.interceptors.request.use(
   }
 );
 
-// 🔹 Interceptor to handle 401 and refresh token
+// Interceptor to handle 401 and refresh token
 Axios.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -49,7 +49,7 @@ Axios.interceptors.response.use(
   }
 );
 
-// 🔹 Helper to refresh access token
+// Helper to refresh access token
 const refreshAccessToken = async (refreshToken) => {
   try {
     const response = await axios({
