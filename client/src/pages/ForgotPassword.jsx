@@ -20,7 +20,7 @@ const ForgotPassword = () => {
     }));
   };
 
-  const validateFeild = Object.values(data).every((el) => el);
+  const validateField = Object.values(data).every((el) => el);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,16 +67,16 @@ const ForgotPassword = () => {
 
           <button
             className={`${
-              validateFeild ? "bg-green-600" : "bg-gray-500"
+              validateField ? "bg-green-600" : "bg-gray-500"
             } text-white px-2 rounded font-semibold h-10 cursor-pointer`}
-            disabled={!validateFeild}
+            disabled={!validateField}
           >
             Send Otp
           </button>
         </form>
 
         <p className="my-2">
-          Already have a account?
+          Already have a account?{" "}
           <Link
             to={"/login"}
             className="font-semibold text-green-600 hover:text-green-800"

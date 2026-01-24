@@ -7,11 +7,12 @@ import SummaryApis from "../common/SummaryApis";
 import toast from "react-hot-toast";
 import AxiosToastError from "../utils/AxiosToastError";
 
-const UploadCategoryModel = ({ close }) => {
+const EditSubCategory = ({ close, data, fetchData }) => {
   const [subCategoryData, setSubCategoryData] = useState({
-    name: "",
-    image: "",
-    category: [],
+    _id: data?._id,
+    name: data?.name,
+    image: data?.image,
+    category: data.category || [],
   });
   const allCategory = useSelector((state) => state.product.allCategory);
   const handleOnChange = (e) => {
@@ -51,7 +52,7 @@ const UploadCategoryModel = ({ close }) => {
     e.preventDefault();
     try {
       const response = await Axios({
-        ...SummaryApis.createSubCategory,
+        ...SummaryApis.updateSubcategory,
         data: subCategoryData,
       });
       const { data: responseData } = response;
@@ -59,6 +60,9 @@ const UploadCategoryModel = ({ close }) => {
         toast.success(responseData.message);
         if (close) {
           close();
+        }
+        if (fetchData) {
+          fetchData();
         }
       }
     } catch (error) {
@@ -69,7 +73,7 @@ const UploadCategoryModel = ({ close }) => {
     <section className="fixed inset-0 p-4 bg-neutral-700/60 flex items-center justify-center">
       <div className="bg-white max-w-5xl w-full p-4 rounded">
         <div className="flex items-center justify-between">
-          <h1 className="font-semibold text-xl">Add New Sub Category</h1>
+          <h1 className="font-semibold text-xl">Edit Sub Category</h1>
           <button className="w-fit block ml-auto">
             <IoClose size={20} onClick={close} className="cursor-pointer" />
           </button>
@@ -193,7 +197,7 @@ const UploadCategoryModel = ({ close }) => {
                 : "bg-gray-600 cursor-not-allowed opacity-60"
             }`}
           >
-            Add Sub Category
+            Edit Sub Category
           </button>
         </form>
       </div>
@@ -201,4 +205,4 @@ const UploadCategoryModel = ({ close }) => {
   );
 };
 
-export default UploadCategoryModel;
+export default EditSubCategory;

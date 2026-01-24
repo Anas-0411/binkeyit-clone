@@ -457,6 +457,30 @@ export async function resetPasswordController(req, res) {
   }
 }
 
+// get user login details
+export async function getUserDetails(req, res) {
+  try {
+    const userId = req.userId;
+    console.log(userId);
+
+    const user = await UserModel.findById(userId).select(
+      "-password -refresh_token"
+    );
+    return res.status(200).json({
+      message: "user details",
+      data: user,
+      success: true,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Internal server error",
+      error: true,
+      success: false,
+    });
+  }
+}
+
 // refresh token controller
 export async function refreshTokenController(req, res) {
   try {
@@ -503,30 +527,6 @@ export async function refreshTokenController(req, res) {
       data: {
         accessToken: newAccessToken,
       },
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: error.message || "Internal server error",
-      error: true,
-      success: false,
-    });
-  }
-}
-
-// get user login details
-export async function getUserDetails(req, res) {
-  try {
-    const userId = req.userId;
-    console.log(userId);
-
-    const user = await UserModel.findById(userId).select(
-      "-password -refresh_token"
-    );
-    return res.status(200).json({
-      message: "user details",
-      data: user,
-      success: true,
-      error: false,
     });
   } catch (error) {
     return res.status(500).json({

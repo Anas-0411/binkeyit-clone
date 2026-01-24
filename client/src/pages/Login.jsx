@@ -28,7 +28,7 @@ const Login = () => {
     }));
   };
 
-  const validateFeild = Object.values(data).every((el) => el);
+  const validateField = Object.values(data).every((el) => el);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,9 +106,9 @@ const Login = () => {
 
           <button
             className={`${
-              validateFeild ? "bg-green-600" : "bg-gray-500"
+              validateField ? "bg-green-600" : "bg-gray-500"
             } text-white px-2 rounded font-semibold h-10 cursor-pointer`}
-            disabled={!validateFeild}
+            disabled={!validateField}
           >
             Login
           </button>

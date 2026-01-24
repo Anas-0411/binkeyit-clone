@@ -10,7 +10,7 @@ import EditCategory from "../components/EditCategory";
 import ConfirmBox from "../components/ConfirmBox";
 import { useSelector } from "react-redux";
 
-const Category = () => {
+const Category = ({ fetchCategory }) => {
   const [openUploadCategory, setOpenUploadCategory] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categoryData, setCategoryData] = useState([]);
@@ -39,7 +39,6 @@ const Category = () => {
   //     if (responseData.success) {
   //       setCategoryData(responseData.data);
   //     }
-  //     // console.log(responseData);
   //   } catch (error) {
   //     AxiosToastError(error);
   //   } finally {
@@ -97,7 +96,7 @@ const Category = () => {
             />
             <div className="flex items-center justify-between p-2 gap-2">
               <button
-                className="flex-1 bg-blue-500 hover:bg-blue-600 text-white rounded py-1 font-semibold"
+                className="flex-1 border rounded border-green-600 text-green-600 hover:bg-green-600 hover:text-white py-1 font-semibold"
                 onClick={() => {
                   setOpenEdit(true);
                   setEditData(category);
@@ -106,7 +105,7 @@ const Category = () => {
                 Edit
               </button>
               <button
-                className="flex-1 bg-red-500 hover:bg-red-600 text-white rounded py-1 font-semibold"
+                className="flex-1 border rounded border-red-600 text-red-600 hover:bg-red-600 hover:text-white py-1 font-semibold"
                 onClick={() => {
                   setOpenConfirmBoxDelete(true);
                   setDeleteCategory(category);
