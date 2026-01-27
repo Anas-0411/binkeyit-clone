@@ -18,6 +18,7 @@ import auth from "../middlewares/auth.middlewares.js";
 import upload from "../middlewares/multer.js";
 
 // creating a router
+
 const userRouter = Router();
 
 // user routes

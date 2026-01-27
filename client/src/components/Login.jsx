@@ -42,7 +42,7 @@ const Login = () => {
               className="flex items-center gap-1 cursor-pointer select-none"
               onClick={() => setOpenUserMenu((preve) => !preve)}
             >
-              <FaUser size={20} className="text-green-700" />
+              <FaUser size={20} className="text-green-700 cursor-pointer" />
               <p className="font-semibold">{user.name || user.mobile}</p>
               {openUserMenu ? (
                 <GoTriangleUp size={25} />

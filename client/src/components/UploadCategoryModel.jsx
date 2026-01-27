@@ -124,7 +124,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
                 : "bg-gray-600 cursor-not-allowed opacity-60"
             }`}
           >
-            Add Category
+            {loading ? "Uploading..." : "Upload Category"}
           </button>
         </form>
       </div>

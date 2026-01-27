@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  createColumnHelper,
+  // createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -14,7 +14,7 @@ const DisplayTable = ({ data, column }) => {
   });
   return (
     <div className="p-2">
-      <table className="w-full">
+      <table className="w-full px-0 py-0 border-collapse border border-slate-400">
         <thead className="bg-black text-white">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

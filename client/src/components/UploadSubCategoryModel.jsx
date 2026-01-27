@@ -7,7 +7,7 @@ import SummaryApis from "../common/SummaryApis";
 import toast from "react-hot-toast";
 import AxiosToastError from "../utils/AxiosToastError";
 
-const UploadCategoryModel = ({ close }) => {
+const UploadCategoryModel = ({ close, fetchData }) => {
   const [subCategoryData, setSubCategoryData] = useState({
     name: "",
     image: "",
@@ -38,7 +38,7 @@ const UploadCategoryModel = ({ close }) => {
   };
   const handleRemoveCategorySelected = (categoryId) => {
     const index = subCategoryData.category.findIndex(
-      (el) => el._id === categoryId
+      (el) => el._id === categoryId,
     );
     subCategoryData.category.splice(index, 1);
     setSubCategoryData((preve) => {
@@ -59,6 +59,9 @@ const UploadCategoryModel = ({ close }) => {
         toast.success(responseData.message);
         if (close) {
           close();
+        }
+        if (fetchData) {
+          fetchData();
         }
       }
     } catch (error) {
@@ -129,7 +132,7 @@ const UploadCategoryModel = ({ close }) => {
             <div>
               {/*display value**/}
               <div className="flex flex-wrap gap-2">
-                {subCategoryData.category.map((cat, index) => {
+                {subCategoryData.category.map((cat) => {
                   return (
                     <p
                       key={cat._id + "selectedValue"}
@@ -148,11 +151,11 @@ const UploadCategoryModel = ({ close }) => {
               </div>
               {/*select category**/}
               <select
-                className="w-full bg-blue-50 p-2 border-2 outline-none border rounded focus:border-amber-500"
+                className="w-full bg-blue-50 p-2 outline-none border rounded focus:border-amber-500"
                 onChange={(e) => {
                   const value = e.target.value;
                   const categoryDetails = allCategory.find(
-                    (el) => el._id == value
+                    (el) => el._id == value,
                   );
                   setSubCategoryData((preve) => {
                     return {
@@ -163,7 +166,7 @@ const UploadCategoryModel = ({ close }) => {
                 }}
               >
                 <option value={""}>--Select Category--</option>
-                {allCategory.map((category, index) => {
+                {allCategory.map((category) => {
                   return (
                     <option
                       value={category?._id}

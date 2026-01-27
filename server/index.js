@@ -2,10 +2,10 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-dotenv.config();
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import helmet from "helmet";
+dotenv.config();
 
 // database connection
 import connectDB from "./config/connectDB.js";
@@ -15,6 +15,7 @@ import userRouter from "./routes/user.route.js";
 import categoryRouter from "./routes/category.route.js";
 import uploadRouter from "./routes/upload.route.js";
 import subCategoryRouter from "./routes/subCategory.route.js";
+import productRouter from "./routes/product.route.js";
 
 
 // using modules
@@ -50,6 +51,7 @@ app.use("/api/user", userRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/file", uploadRouter);
 app.use("/api/subcategory", subCategoryRouter)
+app.use("/api/product", productRouter)
 
 
 // Start the server and connect mongodb

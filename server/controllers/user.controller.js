@@ -145,9 +145,6 @@ export async function loginUserController(req, res) {
       last_login_date: new Date(),
     });
 
-    // const updateUser = await UserModel.findByIdAndUpdate(user._id, {
-    //   last_login_date: new Date(),
-    // });
 
     const cookieOption = {
       httpOnly: true,

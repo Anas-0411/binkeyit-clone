@@ -74,7 +74,7 @@ const SubCategory = () => {
       cell: ({ row }) => {
         return (
           <>
-            {row.original.category.map((c, index) => {
+            {row.original.category.map((c) => {
               return (
                 <p
                   key={c._id + "table"}
@@ -149,8 +149,18 @@ const SubCategory = () => {
         </button>
       </div>
       <div className="overflow-auto w-full max-w-[95vw]">
-        <DisplayTable data={subCategoryData} column={column} />
+        {loading ? (
+          <p className="text-center py-6 text-gray-500">
+            Loading sub categories...
+          </p>
+        ) : (
+          <DisplayTable
+            data={subCategoryData}
+            column={column}
+          />
+        )}
       </div>
+
       {openUploadSubCategory && (
         <UploadSubCategoryModel
           close={() => setOpenUploadSubCategory(false)}

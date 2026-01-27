@@ -24,39 +24,39 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/home",
+        index: true,
         element: <Home />,
       },
       {
-        path: "/search",
+        path: "search",
         element: <SearchPage />,
       },
       {
-        path: "/register",
+        path: "register",
         element: <Register />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/forgot-password",
+        path: "forgot-password",
         element: <ForgotPassword />,
       },
       {
-        path: "/verify-otp",
+        path: "verify-otp",
         element: <OptVerification />,
       },
       {
-        path: "/reset-password",
+        path: "reset-password",
         element: <ResetPassword />,
       },
       {
-        path: "/user",
+        path: "user",
         element: <UserMenuMobile />,
       },
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: <Dashboard />,
         children: [
           {
@@ -96,7 +96,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "myorders",
+            path: "myOrders",
             element: <MyOrders />,
           },
           {

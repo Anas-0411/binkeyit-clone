@@ -1,7 +1,7 @@
 import Axios from "./Axios";
 import SummaryApis from "../common/SummaryApis";
 
-const uploadImageUtils = async (image) => {
+const uploadImageUtils = async (image, res) => {
   try {
     const formData = new FormData();
     formData.append("image", image);
