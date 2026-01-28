@@ -1,5 +1,5 @@
 import React from "react";
-import noDataImage from "../assets/images/nothing here yet.webp";
+import noDataImage from "../../assets/images/nothing here yet.webp";
 
 const NoData = () => {
   return (

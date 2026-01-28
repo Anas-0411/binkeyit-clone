@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
-import Axios from "../utils/Axios";
-import SummaryApis from "../common/SummaryApis";
-import AxiosToastError from "../utils/AxiosToastError";
+import Axios from "../../utils/Axios";
+import SummaryApis from "../../api/SummaryApis";
+import AxiosToastError from "../../utils/AxiosToastError";
 
 const OptVerification = () => {
   const [data, setData] = useState(["", "", "", "", "", ""]);

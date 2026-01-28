@@ -3,9 +3,9 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import toast from "react-hot-toast";
-import Axios from "../utils/Axios";
-import SummaryApis from "../common/SummaryApis";
-import AxiosToastError from "../utils/AxiosToastError";
+import Axios from "../../utils/Axios";
+import SummaryApis from "../../api/SummaryApis";
+import AxiosToastError from "../../utils/AxiosToastError";
 
 const ResetPassword = () => {
   const [data, setData] = useState({

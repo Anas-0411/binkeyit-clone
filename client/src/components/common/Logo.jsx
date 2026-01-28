@@ -1,11 +1,11 @@
 import React from "react";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Logo = () => {
   const navigation = useNavigate();
   const handleLogoClick = () => {
-    navigation("/home");
+    navigation("/");
   };
   return (
     <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 p-2">

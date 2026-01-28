@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import Axios from "../utils/Axios";
-import SummaryApis from "../common/SummaryApis";
+import Axios from "../../utils/Axios";
+import SummaryApis from "../../api/SummaryApis";
 import toast from "react-hot-toast";
-import AxiosToastError from "../utils/AxiosToastError";
-import { updateAvatar } from "../store/userSlice";
+import AxiosToastError from "../../utils/AxiosToastError";
+import { updateAvatar } from "../../store/slice/userSlice";
 import { IoClose } from "react-icons/io5";
 
 const UserProfileAvatar = ({ close }) => {

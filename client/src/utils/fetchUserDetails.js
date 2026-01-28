@@ -1,4 +1,4 @@
-import SummaryApis from "../common/SummaryApis";
+import SummaryApis from "../api/SummaryApis";
 import Axios from "./Axios";
 
 const fetchUserDetails = async () => {
@@ -8,7 +8,7 @@ const fetchUserDetails = async () => {
     });
     return response.data;
   } catch (error) {
-    // console.log(error);
+    return error;
   }
 };
 

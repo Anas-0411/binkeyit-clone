@@ -36,7 +36,7 @@ const userSlice = createSlice({
     updateAvatar: (state, action) => {
       state.avatar = action.payload;
     },
-    logout: (state, action) => {
+    logout: (state) => {
       state._id = "";
       state.name = "";
       state.email = "";

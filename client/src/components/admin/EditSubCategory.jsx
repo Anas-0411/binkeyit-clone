@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import uploadImageUtils from "../utils/uploadImageUtils";
+import uploadImageUtils from "../../utils/uploadImageUtils";
 import { useSelector } from "react-redux";
-import Axios from "../utils/Axios";
-import SummaryApis from "../common/SummaryApis";
+import Axios from "../../utils/Axios";
+import SummaryApis from "../../api/SummaryApis";
 import toast from "react-hot-toast";
-import AxiosToastError from "../utils/AxiosToastError";
+import AxiosToastError from "../../utils/AxiosToastError";
 
 const EditSubCategory = ({ close, data, fetchData }) => {
   const [subCategoryData, setSubCategoryData] = useState({
@@ -133,7 +133,7 @@ const EditSubCategory = ({ close, data, fetchData }) => {
             <div>
               {/*display value**/}
               <div className="flex flex-wrap gap-2">
-                {subCategoryData.category.map((cat, index) => {
+                {subCategoryData.category.map((cat) => {
                   return (
                     <p
                       key={cat._id + "selectedValue"}
@@ -152,7 +152,7 @@ const EditSubCategory = ({ close, data, fetchData }) => {
               </div>
               {/*select category**/}
               <select
-                className="w-full bg-blue-50 p-2 border-2 outline-none border rounded focus:border-amber-500"
+                className="w-full bg-blue-50 p-2 border-2 outline-none rounded focus:border-amber-500"
                 onChange={(e) => {
                   const value = e.target.value;
                   const categoryDetails = allCategory.find(
@@ -167,7 +167,7 @@ const EditSubCategory = ({ close, data, fetchData }) => {
                 }}
               >
                 <option value={""}>--Select Category--</option>
-                {allCategory.map((category, index) => {
+                {allCategory.map((category) => {
                   return (
                     <option
                       value={category?._id}

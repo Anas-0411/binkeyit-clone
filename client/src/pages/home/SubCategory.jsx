@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import UploadSubCategoryModel from "../components/UploadSubCategoryModel";
 import { createColumnHelper } from "@tanstack/react-table";
-import DisplayTable from "../components/DisplayTable";
 import { HiPencil } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
-import EditSubCategory from "../components/EditSubCategory";
-import ViewImage from "../components/ViewImage";
-import ConfirmBox from "./../components/ConfirmBox";
-import Axios from "../utils/Axios";
-import SummaryApis from "../common/SummaryApis";
 import { toast } from "react-hot-toast";
-import AxiosToastError from "../utils/AxiosToastError";
+import Axios from "../../utils/Axios";
+import SummaryApis from "../../api/SummaryApis";
+import AxiosToastError from "../../utils/AxiosToastError";
+import DisplayTable from "./../../components/common/DisplayTable";
+import ViewImage from "../../components/common/ViewImage";
+import UploadSubCategoryModel from "../../components/admin/UploadSubCategoryModel";
+import EditSubCategory from "../../components/admin/EditSubCategory";
+import ConfirmBox from "./../../components/common/ConfirmBox";
 
 const SubCategory = () => {
   const [openUploadSubCategory, setOpenUploadSubCategory] = useState(false);
@@ -154,10 +154,7 @@ const SubCategory = () => {
             Loading sub categories...
           </p>
         ) : (
-          <DisplayTable
-            data={subCategoryData}
-            column={column}
-          />
+          <DisplayTable data={subCategoryData} column={column} />
         )}
       </div>
 

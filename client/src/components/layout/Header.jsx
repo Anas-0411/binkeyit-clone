@@ -1,6 +1,6 @@
 import Search from "./Search";
-import Logo from "./Logo";
-import useMobile from "../hooks/useMobile";
+import Logo from "../common/Logo";
+import useMobile from "../../hooks/useMobile";
 import { useLocation } from "react-router-dom";
 import Login from "./Login";
 

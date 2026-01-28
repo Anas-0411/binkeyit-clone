@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import uploadImageUtils from "../utils/uploadImageUtils";
+import uploadImageUtils from "../../utils/uploadImageUtils";
 import { useSelector } from "react-redux";
-import Axios from "../utils/Axios";
-import SummaryApis from "../common/SummaryApis";
+import Axios from "../../utils/Axios";
+import SummaryApis from "../../api/SummaryApis";
 import toast from "react-hot-toast";
-import AxiosToastError from "../utils/AxiosToastError";
+import AxiosToastError from "../../utils/AxiosToastError";
+// import successAlert from "../../utils/SuccessAlert";
 
 const UploadCategoryModel = ({ close, fetchData }) => {
   const [subCategoryData, setSubCategoryData] = useState({
@@ -57,6 +58,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
       const { data: responseData } = response;
       if (responseData.success) {
         toast.success(responseData.message);
+        // successAlert(responseData.message);
         if (close) {
           close();
         }

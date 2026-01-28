@@ -5,7 +5,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
-import UserMenu from "./UserMenu";
+import UserMenu from "../user/UserMenu";
 
 const Login = () => {
   const [openUserMenu, setOpenUserMenu] = useState(false);

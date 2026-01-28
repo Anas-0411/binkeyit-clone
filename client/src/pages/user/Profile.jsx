@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUser } from "react-icons/fa";
-import UserProfileAvatar from "../components/UserProfileAvatar";
-import Axios from "../utils/Axios";
+import UserProfileAvatar from "../../components/user/UserProfileAvatar";
+import Axios from "../../utils/Axios";
 import toast from "react-hot-toast";
-import SummaryApis from "../common/SummaryApis";
-import AxiosToastError from "../utils/AxiosToastError";
-import { setUserDetails } from "../store/userSlice";
-import fetchUserDetails from "../utils/fetchUserDetails";
+import SummaryApis from "../../api/SummaryApis";
+import AxiosToastError from "../../utils/AxiosToastError";
+import { setUserDetails } from "../../store/slice/userSlice";
+import fetchUserDetails from "../../utils/fetchUserDetails";
 
 const Profile = () => {
   const user = useSelector((state) => state.user);

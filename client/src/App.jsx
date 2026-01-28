@@ -1,15 +1,15 @@
 import "./App.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import fetchUserDetails from "./utils/fetchUserDetails";
-import { setUserDetails } from "./store/userSlice";
-import { setAllCategory, setAllSubCategory } from "./store/productSlice";
+import { setUserDetails } from "./store/slice/userSlice";
+import { setAllCategory, setAllSubCategory } from "./store/slice/productSlice";
 import Axios from "./utils/Axios";
-import SummaryApi from "./common/SummaryApis";
+import SummaryApi from "./api/SummaryApis";
 import { AxiosError } from "axios";
 
 function App() {

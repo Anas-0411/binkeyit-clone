@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import Axios from "../utils/Axios.js";
-import SummaryApis from "../common/SummaryApis";
-import { logout } from "../store/userSlice.js";
+import Axios from "../../utils/Axios.js";
+import SummaryApis from "../../api/SummaryApis.js";
+import { logout } from "../../store/slice/userSlice.js";
 import toast from "react-hot-toast";
-import AxiosToastError from "../utils/AxiosToastError.js";
-import Divider from "./Divider.jsx";
-import isAdmin from "../utils/isAdmin.js";
+import AxiosToastError from "../../utils/AxiosToastError.js";
+import Divider from "../common/Divider.jsx";
+import isAdmin from "../../utils/isAdmin.js";
 
 const UserMenu = ({ close }) => {
   const user = useSelector((state) => state.user);

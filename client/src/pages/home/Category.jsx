@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import UploadCategoryModel from "../components/UploadCategoryModel";
-import Loading from "../components/Loading";
-import NoData from "../components/NoData";
-import Axios from "../utils/Axios";
+import Axios from "../../utils/Axios";
+import SummaryApis from "../../api/SummaryApis";
+import AxiosToastError from "../../utils/AxiosToastError";
 import toast from "react-hot-toast";
-import SummaryApis from "../common/SummaryApis";
-import AxiosToastError from "../utils/AxiosToastError";
-import EditCategory from "../components/EditCategory";
-import ConfirmBox from "../components/ConfirmBox";
-// import { useSelector } from "react-redux";
+import Loading from "../../components/common/Loading";
+import UploadCategoryModel from './../../components/admin/UploadCategoryModel';
+import EditCategory from './../../components/admin/EditCategory';
+import ConfirmBox from './../../components/common/ConfirmBox';
+import NoData from './../../components/common/NoData';
 
 const Category = () => {
   const [openUploadCategory, setOpenUploadCategory] = useState(false);
