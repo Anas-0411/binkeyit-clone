@@ -72,3 +72,44 @@ export const addProductController = async (req, res) => {
     });
   }
 };
+
+// get all products
+export const getAllProductsController = async (req, res) => { 
+  try {
+    let { page, limit, search } = req.body
+
+    if (!page) {
+      page: 1
+    }
+    if (!limit) {
+      limit: 10
+    }
+    // search
+    const query = search ? { $text: {$search: search} } : {}
+
+    // pagination
+    const skip = (page - 1) * limit;
+    
+    // get data
+    const [data, totalCount] = await Promise.all([
+      ProductModel.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit),ProductModel.countDocuments(query)
+    ]);
+
+    return res.status(200).json({
+      error: false,
+      success: true,
+      message: "Product fetched successfully",
+      data: data,
+      totalCount: totalCount,
+      totalPages: Math.ceil(totalCount / limit),
+    })
+
+  }
+  catch (error) {
+    return res.status(500).send({
+      message: error.message || "Internal server error",
+      error: true,
+      success: false,
+    });
+  }
+}

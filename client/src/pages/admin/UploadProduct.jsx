@@ -50,7 +50,7 @@ const UploadProduct = () => {
     });
   };
 
-  // handle image upload
+  // handle upload image
   const handleUploadImage = async (e) => {
     const file = e.target.files[0];
     if (!file) {
@@ -428,7 +428,18 @@ const UploadProduct = () => {
                   name={field}
                   placeholder={`Enter ${field}`}
                   value={data?.more_details[field]}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setData((preve) => {
+                      return {
+                        ...preve,
+                        more_details: {
+                          ...preve.more_details,
+                          [field]: value,
+                        },
+                      };
+                    });
+                  }}
                   className="bg-blue-50 p-2 border-2 rounded outline-none focus:border-amber-500"
                 />
               </div>
@@ -463,6 +474,6 @@ const UploadProduct = () => {
       )}
     </section>
   );
-};
+};;
 
 export default UploadProduct;
