@@ -113,3 +113,30 @@ export const getAllProductsController = async (req, res) => {
     });
   }
 }
+
+// get product by category
+export const getProductByCategoryController = async (req, res) => { 
+  try {
+    const { id } = req.body;
+    if (!id) {
+      return res.status(400).json({
+        message: "Category ID is required",
+        error: true,
+        success: false,
+      });
+    }
+    const product = await ProductModel.find({ category: { $in: id } }).limit(10)
+    return res.status(200).json({
+      message: "Product fetched by category successfully",
+      data : product,
+      error: false,
+      success: true,
+    })
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message || "Internal server error",
+      error: true,
+      success: false,
+    });
+  }
+}

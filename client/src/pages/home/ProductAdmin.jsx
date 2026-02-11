@@ -25,7 +25,7 @@ const ProductAdmin = () => {
   // handle previous button
   const handlePreviousButton = () => {
     if (page > 1) {
-      setPage((preve) => preve + 1);
+      setPage((preve) => preve - 1);
     }
   };
 

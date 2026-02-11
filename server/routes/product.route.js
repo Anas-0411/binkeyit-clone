@@ -3,11 +3,14 @@ import auth from "../middlewares/auth.middlewares.js";
 import {
   addProductController,
   getAllProductsController,
+  getProductByCategoryController,
 } from "../controllers/product.controller.js";
 
 const productRouter = Router();
 
 productRouter.post("/create", auth, addProductController);
-productRouter.post("/getAllProducts", auth, getAllProductsController);
+productRouter.post("/getAllProducts", getAllProductsController);
+productRouter.post("/get-product-by-category", getProductByCategoryController);
+
 
 export default productRouter;

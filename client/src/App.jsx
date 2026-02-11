@@ -6,10 +6,14 @@ import { useDispatch } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import fetchUserDetails from "./utils/fetchUserDetails";
 import { setUserDetails } from "./store/slice/userSlice";
-import { setAllCategory, setAllSubCategory } from "./store/slice/productSlice";
+import {
+  setAllCategory,
+  setAllSubCategory,
+  setLoadingCategory,
+} from "./store/slice/productSlice";
 import Axios from "./utils/Axios";
 import SummaryApi from "./api/SummaryApis";
-import { AxiosError } from "axios";
+import AxiosToastError from "./utils/AxiosToastError";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,20 +28,19 @@ function App() {
   // fetching category
   const fetchCategory = async () => {
     try {
-      // dispatch(setLoadingCategory(true));
+      dispatch(setLoadingCategory(true));
       const response = await Axios({
         ...SummaryApi.getCategory,
       });
       const { data: responseData } = response;
 
       if (responseData.success) {
-        dispatch(
-          setAllCategory(responseData.data),
-          // responseData.data.sort((a, b) => a.name.localeCompare(b.name))
-        );
+        dispatch(setAllCategory(responseData.data));
       }
     } catch (error) {
-      AxiosError(error);
+      AxiosToastError(error);
+    } finally {
+      dispatch(setLoadingCategory(false));
     }
   };
   
